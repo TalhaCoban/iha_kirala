@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light mb-4">
+    <a class="navbar-brand" href="/"> İHA KİRALA </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" 
+    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse space-between" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/uavs">Kiralık ihalar</a>
+        </li>
+        {% if request.user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="/uavs/rented">Kiraladıklarım</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/uavs/rent">Kiraya verdiklerim</a>
+        </li>
+        {% endif %}
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="/user/logout">Çıkış Yap</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="/user/login">Giriş Yap</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/user/register">Kayıt Ol</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+</nav>

@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>İha bilgileri</h2>
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th>Model adi</th>
+                        <td>{{ uav.model_name }}</td>
+                    </tr>
+                    <tr>
+                        <th>üretici firma</th>
+                        <td>{{ uav.manufacturer }}</td>
+                    </tr>
+                    <tr>
+                        <th>iha tipi</th>
+                        <td>{{ uav.uav_type }}</td>
+                    </tr>
+                    <tr>
+                        <th>kalkış ağırlığı</th>
+                        <td>{{ uav.weight }} kg</td>
+                    </tr>
+                    <tr>
+                        <th>boyutları (L x W x H):</th>
+                        <td>{{ uav.dimensions_length }} m x {{ uav.dimensions_width }} m x {{ uav.dimensions_height }} m</td>
+                    </tr>
+                    <tr>
+                        <th>azami hız</th>
+                        <td>{{ uav.max_speed }} km/h</td>
+                    </tr>
+                    <tr>
+                        <th>menzil</th>
+                        <td>{{ uav.range }} km</td>
+                    </tr>
+                    <tr>
+                        <th>görev süresi</th>
+                        <td>{{ uav.endurance }} hours</td>
+                    </tr>
+                    <tr>
+                        <th>faydalı yük kapasitesi</th>
+                        <td>{{ uav.payload_capacity }} kg</td>
+                    </tr>
+                    <tr>
+                        <th>iletişim çapı</th>
+                        <td>{{ uav.communication_range }} km</td>
+                    </tr>
+                    <tr>
+                        <th>navigasyon sistemi</th>
+                        <td>{{ uav.navigation_system }}</td>
+                    </tr>
+                    <tr>
+                        <th>kamera sistemi</th>
+                        <td>{{ uav.camera_imaging_system }}</td>
+                    </tr>
+                    <tr>
+                        <th>azami ıçuş yüksekliği</th>
+                        <td>{{ uav.operating_altitude }} m</td>
+                    </tr>
+                    <tr>
+                        <th>kalkış modu</th>
+                        <td>{{ uav.takeoff_landing_method }}</td>
+                    </tr>
+                    <tr>
+                        <th>kontrol arabirimi</th>
+                        <td>{{ uav.control_interface }}</td>
+                    </tr>
+                    <tr>
+                        <th>diğer özellikler</th>
+                        <td>{{ uav.special_features }}</td>
+                    </tr>
+                    <tr>
+                        <th>saatlik kiralama ücreti (tl)</th>
+                        <td>{{ uav.rent_price_per_hour }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% if user.is_authenticated == False %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    ihalarımızdan kiralayabilmek için kayıt olunuz
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% else %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <a href="/uavs/rent-an-uav/{{uav.id}}" class="btn btn-primary">Kirala</a>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock body %}

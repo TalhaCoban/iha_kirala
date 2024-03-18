@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+
+{% block body %}
+
+{% load crispy_forms_tags %}
+
+<div class="row">
+  <div class="col-md-4 offset-md-4">
+    <h2>Bu ihayı kirala</h2>
+    <hr>
+    <form method = "POST">
+      {% csrf_token %}
+      {{form|crispy}}
+      <div class="row">
+        <div class="col-auto mr-auto">
+          <button type = "submit" class= "btn btn-info"> Kirala </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock body %}

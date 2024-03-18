@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block body %}
+{% if UAVs %}
+
+</div>
+<table class="table table-hover">
+  <thead>
+    <tr>
+        <th scope="col">iha modeli</th>
+        <th scope="col">başlama tarihi</th>
+        <th scope="col">bitiş tarihi</th>
+        <th scope="col"></th>
+
+    </tr>
+  </thead>
+  <tbody>
+{% for uav in UAVs %}
+    <tr>
+        <td> <a href = "/uavs/detail/{{uav.id}}"> {{uav.uavs.model_name }} </a></td>
+        <td> {{uav.startdate}} </td>
+        <td> {{uav.enddate}} </td>
+        <td> <a class = "btn btn-success btn-sm" href = "/uavs/give-back/{{uav.id}}"> Teslim Et </a> </td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+
+{% if user.is_authenticated == False %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    ihalarımızdan kiralayabilmek için kayıt olunuz
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endif %}
+{% endif %}
+{% endblock body %}

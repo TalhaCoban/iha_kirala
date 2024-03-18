@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+
+{% block body %}
+
+{% load crispy_forms_tags %}
+
+<div class="row">
+  <div class="col-md-4 offset-md-4">
+    <h2>Giriş Yap</h2>
+    <hr>
+    <form method = "POST">
+      {% csrf_token %}
+      {{form|crispy}}
+      <div class="row">
+        <div class="col-auto mr-auto">
+          <button type = "submit" class= "btn btn-info"> Giriş Yap </button>
+        </div>
+        <div class="col-auto">
+          <a class="btn btn-info" href="/user/register">Kayıt Ol</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock body %}

@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<a class = "btn btn-primary" href = "/uavs/add/"> Yeni Ekle </a>
+<hr>
+
+{% if UAVs %}
+<div class="col-md-8 offset-md-2">
+  <!-- Search form -->
+      <form class="form-inline space-between">
+          {% csrf_token %}
+          <input class="form-control mr-sm-2" type="text" name ="keyword" placeholder="Ara" aria-label="Ara">
+          <button class="btn btn-warning btn-rounded" type="submit">Ara</button>
+      </form>
+      
+</div>
+<hr>
+</div>
+</div>
+<table class="table table-hover">
+  <thead>
+    <tr>
+        <th scope="col">iha modeli</th>
+        <th scope="col">üretici firma</th>
+        <th scope="col">iha tipi</th>
+        <th scope="col">faydalı yük kapasitesi (kg)</th>
+        <th scope="col">Saatlik kiralama ücreti (tl)</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+{% for uav in UAVs %}
+    <tr>
+        <td> <a href = "/uavs/detail/{{uav.id}}"> {{uav.model_name}} </a></td>
+        <td> {{uav.manufacturer}} </td>
+        <td> {{uav.uav_type}} </td>
+        <td> {{uav.weight}} </td>
+        <td> {{uav.rent_price_per_hour}} </td>
+        <td> <a class = "btn btn-success btn-sm" href = "/uavs/update/{{uav.id}}"> güncelle </a> </td>
+        {% if user.is_authenticated %}
+        <td> <a class = "btn btn-primary btn-sm" href = "/uavs/delete/{{uav.id}}"> sil </a> </td>
+        {% endif %}
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+
+{% if user.is_authenticated == False %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    kiraya iha koyabilmek için lütfen kayıt olun ve giriş yapın
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+{% endif %}
+{% endblock body %}
